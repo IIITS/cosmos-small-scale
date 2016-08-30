@@ -1,0 +1,81 @@
+{% load staticfiles %}
+{% load humanize %}
+<!doctype html>
+<html lang="en">
+<head>
+	{% block title %}<title>{{ title }}</title>{% endblock %}
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A project of NSA, IIITS - developed by Sahal Sajjad">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="{% static 'btp/img/iiits-logo.png' %}">
+	
+
+	<link rel="stylesheet" type="text/css" href="{% static 'btp/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'index/css/material.min.css' %}">
+    <link rel="stylesheet" href="{% static 'btp/css/styles.css' %}">
+	<script src="{% static 'btp/js/jquery.min.js' %}"></script>
+	<script src="{% static 'btp/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'btp/js/script.js' %}"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+  <body>
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      {% block header %}
+      <header class="demo-header mdl-layout__header header-mast mdl-color-text--blue-600">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">{{ header }}</span>
+          <div class="mdl-layout-spacer"></div>
+        </div>
+      </header>
+      <div class="demo-drawer mdl-layout__drawer avatar-box">
+        <header class="demo-drawer-header">
+          
+          <div class="demo-avatar-dropdown">
+          	<span class="user-avatar"><i style="font-size:42px;"class="material-icons" role="presentation">person_pin</i></span>
+            <span>{{ user.first_name | capfirst}} &nbsp;{{ user.last_name | capfirst}} </span>
+            <div class="mdl-layout-spacer"></div>
+            <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+              <i class="material-icons" role="presentation">arrow_drop_down</i>
+              <span class="visuallyhidden">Accounts</span>
+            </button>
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+              <i class="material-icons" role="presentation">person_pin</i>{{ user.get_full_name }}</li>
+              <li class="mdl-menu__item"><a href="/secure/changepassword/">Change Password</li>
+              <li class="mdl-menu__item"><a href="/accounts/signout/"><i class="material-icons">https</i>Sign Out</a></li>
+            </ul>
+          </div>
+        </header>
+        {% endblock %}
+        {% block nav %}
+        <nav class="demo-navigation mdl-navigation header-mast">
+	  
+	  {% ifequal usertype 'students' %}	
+          <a id="deadline-link" class="mdl-navigation__link " ><i class="mdl-color-text--white-400 material-icons" role="presentation">today</i>My Deadlines</a>	 
+          <a id="faculty-link" class="mdl-navigation__link " ><i class="mdl-color-text--white-400 material-icons" role="presentation">account_circle</i>Faculty &amp; Projects</a>
+        
+          
+          <a id="submit-link" class="mdl-navigation__link " ><i class="mdl-color-text--white-400 material-icons" role="presentation">fingerprint</i>My Submissions</a>
+          {% endifequal %}
+	  {% ifequal usertype 'faculty' %}
+          <a id="deadline-link" class="mdl-navigation__link " ><i class="mdl-color-text--white-400 material-icons" role="presentation">today</i>My Students Deadlines</a>	 
+          <a id="faculty-link" class="mdl-navigation__link " ><i class="mdl-color-text--white-400 material-icons" role="presentation">account_circle</i>Faculty &amp; Projects</a>
+          <!--a id="students-link"class="mdl-navigation__link " ><i class="mdl-color-text--white-400 material-icons" role="presentation">account_box</i>Students</a-->
+          <a id="submit-link" class="mdl-navigation__link " ><i class="mdl-color-text--white-400 material-icons" role="presentation">fingerprint</i>My Students Submissions</a>
+	  {% endifequal %}	
+          <div class="mdl-layout-spacer"></div>
+          <a class="mdl-navigation__link" ><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Docs</span></a>
+        </nav>
+        {% endblock %}
+      </div>
+      <main class="mdl-layout__content mdl-color--grey-100">
+       		{% block main %}
+
+       		{% endblock %}	
+      </main>
+    </div>
+      
+      
+    <script src="{% static 'index/js/material.min.js' %}"></script>
+  </body>
+</html>

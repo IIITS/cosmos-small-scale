@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+	{% block title %}<title>{{ title }}</title>{% endblock %}
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A project of NSA, IIITS - developed by Sahal Sajjad">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="{% static 'btp/img/iiits-logo.png' %}">
+	
+
+	<link rel="stylesheet" type="text/css" href="{% static 'btp/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'index/css/material.min.css' %}">
+    <link rel="stylesheet" href="{% static 'btp/css/styles.css' %}">
+	<script src="{% static 'btp/js/jquery.min.js' %}"></script>
+	<script src="{% static 'btp/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'btp/js/script.js' %}"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<div>
+</div>

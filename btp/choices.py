@@ -1,0 +1,1 @@
+YEAR_BATCHES = (('UG1','UG1'),('UG2','UG2'),('UG3','UG3'),('UG4','UG4'))

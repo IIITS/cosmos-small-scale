@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block main %}
+     <div id="deadline-view">
+        {% include 'btp/btp_deadline.html' %}       
+     </div>
+     <div id="faculty-view">
+        {% include 'btp/btp_faculty.html' %}
+     </div>
+     
+   
+     <div id="students-view">
+        {% include 'btp/btp_students.html' %}       
+     </div>
+     <div id="submit-view">
+        {% include 'btp/btp_submit.html' %} 
+     </div>
+{% endblock %}

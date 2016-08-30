@@ -1,0 +1,417 @@
+
+body {
+  margin: 0;
+}
+
+/* Disable ugly boxes around images in IE10 */
+a img{
+  border: 0px;
+}
+.cosmos-logo{
+ font:normal 40px Arial;
+ color:#FFFFFF;
+ text-shadow: 0 1px 0 #ccc,
+ 0 2px 0 #c9c9c9,
+ 0 3px 0 #bbb,
+ 0 4px 0 #b9b9b9,
+ 0 5px 0 #aaa,
+ 0 6px 1px rgba(0,0,0,.1),
+ 0 0 5px rgba(0,0,0,.1),
+ 0 1px 3px rgba(0,0,0,.3),
+ 0 3px 5px rgba(0,0,0,.2),
+ 0 5px 10px rgba(0,0,0,.25),
+ 0 10px 10px rgba(0,0,0,.2),
+ 0 20px 20px rgba(0,0,0,.15);
+}
+
+::-moz-selection {
+  background-color: #6ab344;
+  color: #fff;
+}
+
+::selection {
+  background-color: #6ab344;
+  color: #fff;
+}
+
+
+.septem-header .mdl-menu__container {
+  z-index: 50;
+  margin: 0 !important;
+}
+
+
+.mdl-textfield--expandable {
+  width: auto;
+}
+
+.septem-fab {
+  position: absolute;
+  right: 20%;
+  bottom: -26px;
+  z-index: 3;
+  background: #64ffda !important;
+  color: black !important;
+}
+
+.septem-mobile-title {
+  display: none !important;
+}
+
+
+.septem-logo-image {
+  height: 75px;
+  width: 75px;
+}
+
+
+.septem-header {
+  overflow: visible;
+  background-color: white;
+}
+
+  .septem-header .material-icons {
+    color: #767777 !important;
+  }
+
+  .septem-header .mdl-layout__drawer-button {
+    background: transparent;
+    color: #767777;
+  }
+
+  .septem-header .mdl-navigation__link {
+    color: #757575;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .septem-navigation-container {
+    /* Simple hack to make the overflow happen to the left instead... */
+    direction: rtl;
+    -webkit-box-ordinal-group: 2;
+    -webkit-order: 1;
+        -ms-flex-order: 1;
+            order: 1;
+    width: 500px;
+    -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .septem-navigation {
+    /* ... and now make sure the content is actually LTR */
+    direction: ltr;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    width: 800px;
+  }
+
+  .septem-search-box.is-focused + .septem-navigation-container {
+    opacity: 0;
+    width: 100px;
+  }
+
+
+  .septem-navigation .mdl-navigation__link {
+    display: inline-block;
+    height: 60px;
+    line-height: 68px;
+    background-color: transparent !important;
+    border-bottom: 4px solid transparent;
+  }
+
+    .septem-navigation .mdl-navigation__link:hover {
+      border-bottom: 4px solid black;
+    }
+
+ 
+
+
+
+
+.septem-be-together-section {
+  position: relative;
+  height: 800px;
+  width: auto;
+  background-color: #f3f3f3;
+  background: url('../images/slide02.jpg') center 30% no-repeat;
+  background-size: cover;
+}
+
+.logo-font {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  line-height: 1;
+  color: black;
+  font-weight: 500;
+}
+
+.septem-slogan {
+  font-size: 60px;
+  padding-top: 160px;
+}
+
+.septem-sub-slogan {
+  font-size: 21px;
+  padding-top: 24px;
+}
+
+.septem-link {
+  text-decoration: none;
+  color: #660029 !important;
+}
+
+.septem-link:hover {
+    color: #660029 !important;
+    text-shadow:5px 2px 2px black;	
+}
+
+.septem-link .material-icons {
+    position: relative;
+    top: 6px;
+}
+
+.septem-alt-link {
+  text-decoration: none;
+  color: #64ffda !important;
+  font-size: 16px;
+}
+
+  .septem-alt-link:hover {
+    color: #00bfa5 !important;
+  }
+
+  .septem-alt-link .material-icons {
+    position: relative;
+    top: 6px;
+  }
+
+.septem-customized-section {
+  text-align: center;
+}
+
+.septem-customized-section-text {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 80px 16px 0 16px;
+}
+
+.septem-customized-section-text p {
+    padding-top: 16px;
+  }
+
+
+
+.septem-more-section {
+  padding: 80px 0;
+  max-width: 1044px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.septem-more-section .septem-section-title {
+    margin-left: 12px;
+    padding-bottom: 24px;
+  }
+
+.android-card-container {
+}
+
+.septem-card-container .mdl-card__media {
+    overflow: hidden;
+    background: transparent;
+  }
+
+.septem-card-container .mdl-card__media img {
+      width: 100%;
+    }
+
+.septem-card-container .mdl-card__title {
+    background: transparent;
+    height: auto;
+  }
+
+.septem-card-container .mdl-card__title-text {
+    color: black;
+    height: auto;
+}
+
+.septem-card-container .mdl-card__supporting-text {
+    height: auto;
+    color: black;
+    padding-bottom: 48px;
+}
+
+.septem-card-container .mdl-card__actions {
+    position: absolute;
+    bottom: 0;
+}
+.septem-card-container .mdl-card__actions a {
+    border-top: none;
+    line-height: 32px;
+    font-size: 16px;
+  }
+
+.septem-footer {
+  background-color: #fafafa;
+  position: relative;
+}
+
+.septem-footer a:hover {
+    color: #8bc34a;
+  }
+
+.septem-footer .mdl-mega-footer--top-section::after {
+    border-bottom: none;
+  }
+
+.septem-footer .mdl-mega-footer--middle-section::after {
+    border-bottom: none;
+  }
+
+.septem-footer .mdl-mega-footer--bottom-section {
+    position: relative;
+  }
+
+.septem-footer .mdl-mega-footer--bottom-section a {
+    margin-right: 2em;
+  }
+
+.septem-footer .mdl-mega-footer--right-section a .material-icons {
+    position: relative;
+    top: 6px;
+  }
+.septem-login-form{
+	margin:50px auto;
+}
+.septem-login-form-card-title{
+	height:60px;
+	background:url('../images/login-title.jpg') center/cover;
+	color:white;
+	padding: 10px 72px !important;
+}
+.septem-more-button {
+    -webkit-box-ordinal-group: 4;
+    -webkit-order: 3;
+        -ms-flex-order: 3;
+            order: 3;
+  }
+.septem-link-menu:hover {
+  cursor: pointer;
+}
+
+
+/**** Mobile layout ****/
+@media (max-width: 900px) {
+  .septem-navigation-container {
+    display: none;
+  }
+
+  .septem-title {
+    display: none !important;
+  }
+
+  .septem-mobile-title {
+    display: block !important;
+    position: absolute;
+    left: calc(50% - 70px);
+    top: 12px;
+    -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* WebViews in iOS 9 break the "~" operator, and WebViews in OS X 10.10 break
+     consecutive "+" operators in some cases. Therefore, we need to use both
+     here to cover all the bases. */
+  .septem-mobile-title,
+  .septem-search-box.is-focused + .septem-navigation-container + .septem-mobile-title {
+    opacity: 0;
+  }
+
+  .septem-more-button {
+    display: none;
+  }
+
+  .septem-search-box.is-focused {
+    width: calc(100% - 48px);
+  }
+
+  .septem-search-box .mdl-textfield__expandable-holder {
+    width: 100%;
+  }
+
+  .septem-be-together-section {
+    height: 350px;
+  }
+
+  .septem-slogan {
+    font-size: 26px;
+    margin: 0 16px;
+    padding-top: 24px;
+  }
+
+  .septem-sub-slogan {
+    font-size: 16px;
+    margin: 0 16px;
+    padding-top: 8px;
+  }
+
+  .septem-create-character {
+    padding-top: 200px;
+    font-size: 16px;
+  }
+
+  .septem-create-character img {
+    height: 12px;
+  }
+
+  .septem-fab {
+    display: none;
+  }
+
+
+
+  .septem-footer .mdl-mega-footer--bottom-section {
+    display: none;
+  }
+}
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
+       url(../fonts/MaterialIcons-Regular.woff) format('woff'),
+       url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}

@@ -1,0 +1,125 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+	{% block title %}<title>{{ title }}</title>{% endblock %}
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A project of NSA, IIITS - developed by Sahal Sajjad">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="{% static 'btp/img/iiits-logo.png' %}">
+	
+
+	<link rel="stylesheet" type="text/css" href="{% static 'btp/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'index/css/material.min.css' %}">
+    <link rel="stylesheet" href="{% static 'btp/css/styles.css' %}">
+	<script src="{% static 'btp/js/jquery.min.js' %}"></script>
+	<script src="{% static 'btp/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'btp/js/script.js' %}"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<style>
+.deadline-card-wide.mdl-card {
+    width: 100%;
+}
+.deadline-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url('../static/btp/img/fac-card.jpg') center / cover;
+}
+.deadline-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+	</style>
+</head>
+{% ifequal usertype 'students' %}
+<div class="deadline-card-wide mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">{% ifequal usertype 'students' %}My Deadlines{%endifequal%}{% ifequal usertype 'faculty' %}Deadlines of my students {% endifequal%}</h2>
+  </div>
+  <div class="mdl-card__supporting-text">
+   {% ifequal usertype 'students' %} Upcoming deadlines for me.{% endifequal %}{% ifequal usertype 'faculty' %}Upcoming evaluations for my students {%endifequal%}
+  </div>
+  
+  
+</div>
+	
+<center>
+{% ifequal usertype 'students' %}
+<h5>My evaluation and deadlines</h5>
+
+</center>	
+<center><table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+	 
+	  <tbody>
+		<tr>
+			<td>
+				Submission Deadline Ahead:
+			</td>
+			<td>
+				 {{ btpsetweek.submitdeadline }}
+			</td>		
+		</tr>
+		<tr>
+			<td>
+				Date for your evaluation :
+			</td>
+			<td>
+				{{ btpsetweek.evalday }} ( 3:30pm - 5:00pm )
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Your upload date starts on:
+			</td>
+			<td>
+				{{ btpsetweek.starttime }}
+			</td>
+		  </tr>
+	
+</table>
+<center><h5>Project Groups for evaluation this week</h5></center>
+	
+<center><table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+  
+  <tbody>
+    	
+    {% for btpg in btpgs%}	
+    <tr>
+     	
+      <td class="mdl-data-table__cell--non-numeric" {% ifequal btpg.id pgid%}
+		style="background: #154165 none repeat scroll 0% 0%; color: white; font-weight: bold;"
+	{%endifequal %}>
+		
+	{{ btpg.project }}
+      </td>
+     </tr>
+    {% endfor%}
+  </tbody>
+</table>
+</center>
+{% endifequal %}
+{% ifequal usertype 'faculty' %}
+<center><h5>Upcoming evaluations of my students</h5></center>
+<center><table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+  
+  <tbody>
+    	
+    {% for evalday in evaldays%}	
+    <tr>
+     	
+      <td class="mdl-data-table__cell--non-numeric" >
+		
+	{{ evalday.group.project }}
+      </td>
+	<td class="mdl-data-table__cell--non-numeric" >
+		
+	{{ evalday.evalday }}
+      </td>
+     </tr>
+    {% endfor%}
+  </tbody>
+</table>
+</center>
+{% endifequal %}
+
+

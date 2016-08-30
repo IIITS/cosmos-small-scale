@@ -1,0 +1,78 @@
+{% load staticfiles %}
+<!doctype html>
+
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Cosmos, a new way to make a smart living">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cosmos </title>
+
+    <!-- Page styles -->
+    <link rel="stylesheet" href="{% static 'index/css/material.min.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/styles.css' %}">
+  </head>
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <div class="septem-header mdl-layout__header mdl-layout__header--waterfall">
+        <div class="mdl-layout__header-row">
+          <span class="septem-title mdl-layout-title">
+            <img class="septem-logo-image" src="{% static 'index/images/iiits-logo.png' %}" alt="IIIT-S"><span class="cosmos-logo">cosmos</span>
+          </span>
+          <!-- Add spacer, to align navigation to the right in desktop -->
+          <div class="septem-header-spacer mdl-layout-spacer"></div>
+         
+          <!-- Navigation -->
+          <div class="septem-navigation-container">
+            <nav class="septem-navigation mdl-navigation">
+              <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/btp/">BTP</a>
+              <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/honors/">HONORS</a>
+              <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/internships/">INTERNSHIPS</a>
+	      <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/placements/">PLACEMENTS</a>	
+              <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/ideas/">IDEAS</a>
+              <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/entrepreneurships/">ENTREPRENEURSHIPS</a>
+              
+            </nav>
+          </div>
+          <span class="septem-mobile-title mdl-layout-title">
+            <img class="septem-logo-image" src="{% static 'index/images/iiits-logo.png' %}"><span class="cosmos-logo">cosmos</span>
+          </span>
+          <button class="septem-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
+            <i class="material-icons">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+            <li class="mdl-menu__item">{{ user.get_full_name }}</li>
+            <li class="mdl-menu__item"><a href="/secure/changepassword/">change password</a></li>
+            <li class="mdl-menu__item"><a href="/accounts/signout/">sign out</a></li>
+          </ul>
+        </div>
+      </div>
+
+      
+
+      <div class="septem-content mdl-layout__content">
+        <a name="top"></a>
+        <div class="septem-be-together-section mdl-typography--text-center">
+          <div class="logo-font septem-slogan">Together towards a smart living.</div>
+          <div class="logo-font septem-sub-slogan">Welcome to IIIT-S Cosmos... The Universe of Projects, Research, Innovations and Entrepreneurships </div>
+          
+        </div>
+        
+        
+        <footer class="septem-footer mdl-mega-footer">
+          <div class="mdl-mega-footer--bottom-section">
+            <a class="septem-link mdl-typography--font-light" href="">Developed by Sahal Sajjad</a>
+            <a class="septem-link mdl-typography--font-light" href="">A project of NSA, IIIT Sri City</a>
+          </div>
+
+        </footer>
+      </div>
+    </div>
+   
+    <script src="{% static 'index/js/material.min.js' %}"></script>
+
+
+  </body>
+</html>

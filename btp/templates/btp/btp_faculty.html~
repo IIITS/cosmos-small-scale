@@ -1,0 +1,83 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+	{% block title %}<title>{{ title }}</title>{% endblock %}
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A project of NSA, IIITS - developed by Sahal Sajjad">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="{% static 'btp/img/iiits-logo.png' %}">
+	
+
+	<link rel="stylesheet" type="text/css" href="{% static 'btp/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'index/css/material.min.css' %}">
+    <link rel="stylesheet" href="{% static 'btp/css/styles.css' %}">
+	<script src="{% static 'btp/js/jquery.min.js' %}"></script>
+	<script src="{% static 'btp/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'btp/js/script.js' %}"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<style>
+	.faculty-cont{ margin:10px auto; }
+	.faculty-description{ display:none;}
+	.faculty-describe{ display:block;}
+	.faculty-describe ul {list-style: none;}
+	.faculty-describe ul li a{text-decoration: none; color:black;}
+	.fac-card-wide.mdl-card {
+    width: 100%;
+}
+.fac-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url('../static/btp/img/fac-card.jpg') center / cover;
+}
+.fac-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+	</style>
+</head>
+<div class="fac-card-wide mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Faculty &amp; Projects</h2>
+  </div>
+  <div class="mdl-card__supporting-text">
+    List of Faculty-wise Projects
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      Get Started
+    </a>
+  </div>
+  <div class="mdl-card__menu">
+    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+      <i class="material-icons">share</i>
+    </button>
+  </div>
+</div>
+{% for fac in faculty %}
+	<div class="faculty-cont mdl-card mdl-shadow--2dp through mdl-shadow--16dp" style="width:80%; min-height:50px !important;">
+		<div class="mdl-card--border mdl-card__title">
+			<h2 class="mdl-card__title-text">{{ fac.user.get_full_name }}</h2>
+		</div>
+		<div class="mdl-card__supporting-text">
+			<button onclick="showprojects({{fac.id}})" id="showpro-{{fac.id}}" class="mdl-button mdl-js-button mdl-js-ripple-effect">Show Projects</button>	
+			<div class="faculty-description" id="fac-description-{{fac.id}}">
+				<ul>
+				{% for pro in fac.get_all_projects %}
+					<li><a>{{pro.code}}&nbsp;{{pro.title}}</a></li>
+				{% endfor %}
+				</ul>	
+			</div> 
+		</div> 		
+	</div>
+{% endfor %}
+<script>
+	$(document).ready(function(){
+
+  	window.showprojects = function(fid){
+  		$('#showpro-'+fid).hide();
+    	$('#fac-description-'+fid).addClass('faculty-describe').removeClass('faculty-description');
+  	} 
+	});
+
+</script>

@@ -1,0 +1,170 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+	{% block title %}<title>{{ title }}</title>{% endblock %}
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A project of NSA, IIITS - developed by Sahal Sajjad">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="{% static 'btp/img/iiits-logo.png' %}">
+	
+
+	<link rel="stylesheet" type="text/css" href="{% static 'btp/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'index/css/material.min.css' %}">
+    <link rel="stylesheet" href="{% static 'btp/css/styles.css' %}">
+	<script src="{% static 'btp/js/jquery.min.js' %}"></script>
+	<script src="{% static 'btp/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'btp/js/script.js' %}"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<style>
+		.display-li{
+			list-style:none;
+		}
+		.fileUpload {
+		    position: relative;
+		    overflow: hidden;
+		    margin: 10px auto;
+		}
+		.fileUpload input.upload {
+		    position: absolute;
+		    top: 0;
+		    right: 0;
+		    margin: 0px auto;
+		    padding: 0;
+		    font-size: 20px;
+		    cursor: pointer;
+		    opacity: 0;
+		    filter: alpha(opacity=0);
+		}
+		.file_upload_card{
+			width:50%;
+			margin:auto;
+			
+		}
+		.upload-card-wide.mdl-card{
+		width:100%;
+	}
+.sub-card-wide.mdl-card {
+    width: 100%;
+	 
+}
+.sub-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url('../static/btp/img/fac-card.jpg') center / cover;
+}
+.sub-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+	</style>
+</head>
+<div class="sub-card-wide mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">{% ifequal usertype 'students' %}My Submissions{%endifequal%}{% ifequal usertype 'faculty' %}My Students Submissions{%endifequal%}</h2>
+  </div>
+  <div class="mdl-card__supporting-text">
+   {% ifequal usertype 'students' %}Submissions made by my group.{%endifequal%}{% ifequal usertype 'faculty' %}Submissions by my students{%endifequal%}
+  </div>
+</head>
+<div class="submit-here">
+{{ before_deadline }}
+{% ifequal usertype 'students' %}
+
+<div class="upload-card-wide mdl-card mdl-shadow--2dp">
+    	
+    {% if before_deadline %}
+    <center><h5>Please  upload your report here</h5></center>
+  
+  
+  <center class="file_upload_card mdl-card__actions mdl-card--border">
+    <form id="file-submit-form" method="post" action="post/report/" enctype="multipart/form-data" >
+		{% csrf_token %}
+		<div class="fileUpload btn btn-primary">
+    			
+    			{{ submissionsform.fileuploaded }}
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect disabled">
+  				Submit
+				</button>
+		</div>
+	</form>
+    <a href="{{MEDIA_URL}}btp/files/BTP_Questionnaire_Spring_2016.docx">Template Questionnaire</a>
+  </center>
+  {%endif%}
+
+  {% if after_deadline %}
+  <center><h4>Upload option is closed. Deadline ended!</h4></center>	
+  {%endif%}	
+</div>
+<center><h5>Submissions made by my Group</h5></center>
+
+<center >{%for sub in submissions%}
+	<li class="display-li"><a href={{sub.fileuploaded.url}}>{{sub.get_filename}}</a>, submitted by {{sub.submitted_by.get_full_name}} on {{sub.submitted_at}}</li>
+	{% empty %}
+	<li class="display-li">No submissions made yet</li> 	
+{% endfor %}
+</center>
+{% endifequal %}
+{% ifequal usertype 'faculty'%}
+<center><h5>Submissions made by my Students this week</h5></center>
+
+<center >{%for sub in mystudentsubmissions%}
+	<li class="display-li"><a href={{sub.fileuploaded.url}}>{{sub.get_filename}}</a>, submitted by {{sub.submitted_by.get_full_name}} on {{sub.submitted_at}}</li>
+	{% empty %}
+	<li class="display-li">No submissions made yet</li> 	
+{% endfor %}
+</center>
+{% endifequal %}
+
+{% if evalpanel %}
+<center><h5>Submissions made by all Students this week</h5></center>
+
+<center >{%for sub in all_submissions_week%}
+	<li class="display-li"><a href={{sub.fileuploaded.url}}>{{sub.get_filename}}</a>, submitted by {{sub.submitted_by.get_full_name}} on {{sub.submitted_at}}</li>
+	{% empty %}
+	<li class="display-li">No submissions made yet</li> 	
+{% endfor %}
+</center>
+{% endif %}	
+</div>
+<script>
+document.getElementById("uploadBtn").onchange = function () {
+    document.getElementById("uploadFile").value = this.value;
+};
+
+$('#file-submit-form').on('submit',function(){
+	    
+	    $.ajax({
+        	url : "post/report/", // the endpoint
+        	type : "POST", // http method
+        	data : { 'fileuploaded' : $('#uploadBtn').val() }, // data sent with the post request
+
+        	success : function(json) {
+        	console.log(json);
+		
+       		 },
+
+        	// handle a non-successful response
+        	error : function(xhr,errmsg,err) {
+            	
+        	}
+    	});
+	$.ajax({
+        	url : "post/report/", // the endpoint
+        	type : "GET", // http method
+        	data : { 'fileuploaded' : $('#uploadBtn').val() }, // data sent with the post request
+
+        	success : function(json) {
+        	console.log(json);
+		
+       		 },
+
+        	// handle a non-successful response
+        	error : function(xhr,errmsg,err) {
+            	
+        	}
+    	});
+
+
+    });
+</script>

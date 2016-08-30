@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+	{% block title %}<title>{{ title }}</title>{% endblock %}
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A project of NSA, IIITS - developed by Sahal Sajjad">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="{% static 'btp/img/iiits-logo.png' %}">
+	
+
+	<link rel="stylesheet" type="text/css" href="{% static 'btp/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'index/css/material.min.css' %}">
+    <link rel="stylesheet" href="{% static 'btp/css/styles.css' %}">
+	<script src="{% static 'btp/js/jquery.min.js' %}"></script>
+	<script src="{% static 'btp/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'btp/js/script.js' %}"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<style>
+	.stud-cont{ margin:10px auto; }
+	.stud-description{ display:none;}
+	.stud-describe{ display:block;}
+	</style>
+</head>
+<div class="stud-cont mdl-card mdl-shadow--2dp through mdl-shadow--16dp" style="width:80%;">
+	<div class="mdl-card--border mdl-card__title">
+		<h2 class="mdl-card__title-text">Students</h2>
+	</div>
+	<div class="mdl-card__supporting-text">
+		List of all students who opted for B.Tech Projects. 
+	</div>
+</div>
+{% for stud in students %}
+	<div class="stud-cont mdl-card mdl-shadow--2dp through mdl-shadow--16dp" style="width:80%; min-height:50px !important;">
+		<div class="mdl-card--border mdl-card__title">
+			<h2 class="mdl-card__title-text">{{ stud.user.get_full_name }}</h2>
+		</div>
+		<div class="mdl-card__supporting-text">
+			<button onclick="readmore({{project.id}})" id="read-{{project.id}}" class="mdl-button mdl-js-button mdl-js-ripple-effect">VIEW DETAILS</button>	
+			<div class="stud-description" id="full-description-{{project.id}}">
+				<p>Roll No: {{ stud.rollno | linebreaks }}
+			</div>
+		</div> 		
+	</div>
+{% endfor %}
+<script>
+	$(document).ready(function(){
+
+  	window.readmore = function(pid){
+  		$('#read-'+pid).hide();
+    	$('#full-description-'+pid).addClass('stud-describe').removeClass('stud-description');
+  	} 
+	});
+
+</script>
