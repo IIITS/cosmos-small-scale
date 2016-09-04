@@ -29,88 +29,22 @@ class IndexView(TemplateView):
 class BTPIndexView(TemplateView):
 	template_name = 'btp/btpindex.html'
 			
-	def post(self, request, *args, **kwargs):
-		usertype = getUserTypes(self.request.user)
-		if "STUDENT" in usertype:
-			form = SubmissionForm(self.request.FILES, self.request.POST)
-			print self.request.FILES['fileuploaded']
-                	fileuploaded = self.request.FILES['fileuploaded']
-			
-
-			pg = getProjectGroupByStudentId(getStudentIdByUser(self.request.user))
-			evalset = getBTPEvalSetByProjectGroup(pg)
-			getAllBTPProjectGroupsByEvalSet(evalset)		
-			pgid = pg.id
-			try:
-				currweek = getCurrentWeek()
-				week = BTPSetWeek.objects.get(week = currweek, sets=evalset)
-				try:
-					submit = BTPSubmission.objects.get(week = week , projectgroup = pg)
-		
-					submit.fileuploaded = fileuploaded
-					submit.submitted_by = self.request.user 
-					
-					submit.save()
-				except ObjectDoesNotExist as error:
-					submit = BTPSubmission( week = week , projectgroup = pg, fileuploaded = fileuploaded, submitted_by = self.request.user )
-					submit.save()
-				return JsonResponse({"posted":"True"})
-			except ObjectDoesNotExist as error:
-				week = BTPSetWeek.objects.all()[0]
-				print "Here"
-		return JsonResponse({"posted":"False"})
 	def get_context_data(self, **kwargs):
 		context=super(BTPIndexView,self).get_context_data(**kwargs)
 		
 		students = BTPStudent.objects.order_by('rollno')
 		faculty = Faculty.objects.order_by('user__first_name')
-		
+		batches = Batch.objects.order_by('graduate_year')
 		
 		context = {'title':'Home - BTP',
 			   'students':students,
 			   'faculty':faculty,
 			   'header':'B-Tech Projects Portal',
                            'MEDIA_URL':settings.MEDIA_URL,
+                'batches':batches           
 			   		
 		}
-		usertypes = getUserTypes(self.request.user)
-                print usertypes
-		if "STUDENT" in usertypes:
-			mysubmissions = BTPSubmission.objects.filter(submitted_by = self.request.user).order_by('submitted_at')
-			sets = getBTPEvalSetByProjectGroup( getProjectGroupByStudentId(getStudentIdByUser(self.request.user)) )
-			week = getCurrentWeek()
-			context['submissionsform']=SubmissionForm(self.request.FILES, self.request.POST)
-			currweek = getCurrentWeek()
-			pg = getProjectGroupByStudentId(getStudentIdByUser(self.request.user))
-			evalset = getBTPEvalSetByProjectGroup(pg)
-			btpgs = getAllBTPProjectGroupsByEvalSet(evalset)
-			btpsetweek = getBTPSetWeek(sets, week)
-			mysubmissions = getMyGroupSubmission(pg, btpsetweek )
-			context['before_deadline'] = checkBeforeDeadline(btpsetweek)
 		
-			context['pgid']= pg.id
-			context['evalset'] = evalset
-			context['btpgs'] = btpgs
-			
-			context['btpsetweek'] = btpsetweek
-			context['usertype'] = 'students'
-			context['submissions'] = mysubmissions
-			
-		if "FACULTY" in usertypes:
-			facid = getFacultyIdByUser(self.request.user)
-			week = getCurrentWeek()
-			currweek = getCurrentWeek()
-			pgs = getAllProjectGroupsFaculty(facid)
-			evaldays = getProjectGroupEvalDay(pgs)
-			sortedevaldays = sorted(evaldays, key=lambda k: k['evalday']) 
-			SUBMISSIONS = []	
-			for pg in pgs:
-				sub = getAllSubmissionsPG(pg)
-				SUBMISSIONS.append(sub)
-			context['mystudentsubmissions'] = SUBMISSIONS
-			context['usertype'] = 'faculty'
-			context['pgs'] = pgs
-			context['evaldays'] = sortedevaldays
 		return context
 	def dispatch(self, *args, **kwargs):
 		return super(BTPIndexView,self).dispatch(*args,**kwargs)

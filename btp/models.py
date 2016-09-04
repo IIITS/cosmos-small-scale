@@ -11,17 +11,26 @@ def content_file_name(instance, filename):
 class Application(models.Model):
 	name = models.CharField(max_length=50)
 
-
+class Batch(models.Model):
+	
+	background_css = models.TextField()
+	admission_year = models.CharField(max_length=4)  
+	graduate_year = models.CharField(max_length=4)
+	btp_start_year = models.CharField(max_length=4)
+	btp_end_year = models.CharField(max_length=4)
+	honors_start_year = models.CharField(max_length=4)
+	honors_end_year = models.CharField(max_length=4)
+	def __str__(self):
+		return self.admission_year+ " - "+self.graduate_year
+	class Meta:
+	        verbose_name_plural = "Batches"
+        	
 class BTPProject(models.Model):
 	code = models.CharField(max_length=8)
 	title = models.CharField(max_length=150)
-	description = models.TextField(default='NA')
+	keywords = models.TextField(default='NA')
 	supervisor = models.TextField()
-	postedby = models.ForeignKey(User)
-	isfileuploaded = models.BooleanField(default=False)
-	isexternal = models.BooleanField(default=False)
-	fileuploaded = models.FileField(null=True,blank=True,upload_to='')
-	display = models.BooleanField(default=True)
+	
 	def __str__(self):
 		return str(self.code)+" "+str(self.title)
 	
@@ -39,6 +48,9 @@ class BTPStudent(models.Model):
 		return self.user.get_full_name() 
 
 class Faculty(models.Model):
+	class Meta:
+        	verbose_name_plural = "Faculties"
+
 	user = models.OneToOneField(User)
 	
 	def __str__(self):
@@ -50,7 +62,7 @@ class Faculty(models.Model):
 		ProjectList = []
 		btpprojects = BTPProject.objects.all()
 		for btpro in btpprojects:
-			if (self.id in btpro.supervisor):
+			if (self.user.username in btpro.supervisor):
 				ProjectList.append(btpro)
 
 		return ProjectList
@@ -115,10 +127,15 @@ class BTPSubmission(models.Model):
 		return fname
 
 class Resources(models.Model):
+	class Meta:
+        	verbose_name_plural = "Resources"
+
 	code = models.CharField(max_length = 25) 
 	fileupload = models.FileField(upload_to='/static/btp/files/')
 
 class BTPMarks(models.Model):
+	class Meta:
+	        verbose_name_plural = "BTPMarks"
 	semester = models.ForeignKey(Semester) 
 	projectgroup = models.ForeignKey(BTPProjectGroup)
 	panelmarks = models.PositiveIntegerField(default=0)

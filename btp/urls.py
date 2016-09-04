@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 urlpatterns = [
 	url(r'^$', views.IndexView.as_view(), name='homepage'),
 	url(r'btp/$', views.BTPIndexView.as_view(),name='btphomepage'),
-	url(r'honors/$', login_required(views.UnderConstruction.as_view()),name='btphomepage'),
+	url(r'honors/$', views.UnderConstruction.as_view(),name='btphomepage'),
 	url(r'internships/$', login_required(views.UnderConstruction.as_view()),name='btphomepage'),
 	url(r'entrepreneurships/$', login_required(views.UnderConstruction.as_view()),name='btphomepage'),
 	url(r'placements/$', login_required(views.UnderConstruction.as_view()),name='btphomepage'),

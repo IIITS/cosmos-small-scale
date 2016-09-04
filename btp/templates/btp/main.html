@@ -1,0 +1,51 @@
+<div id="main--batches" class="main--active">
+	<center>
+	{% for batch in batches %}
+		<div class="col-lg-4 col-md-4">
+		<div class="card blue-grey" style="background:{{batch.background_css}}">
+            <div class="card-content white-text">
+              <span class="card-title"><b>Batch</b> {{batch.admission_year}}&nbsp;-&nbsp;{{batch.graduate_year}}</span>
+              <p><b>Project span</b> {{batch.honors_start_year}} - {{batch.honors_end_year}}</p>
+            </div>
+            <div class="card-action">
+              <a href="#">BTP</a>
+              <a href="#">Honors </a>
+            </div>
+        </div>
+        </div>
+	{%endfor%}
+	</center>
+</div>
+<div id="main--faculty" class="main--inactive">
+	{% for f in faculty %}
+		<div class="col-lg-11 col-md-11">
+		<div class="card blue-grey" style="background:white">
+            <div class="card-content" style="color:rgb(103, 104, 101);">
+              <span class="card-title"><b>{{ f.user.get_full_name }}</b></span>
+            </div>
+            <div class="card-action">
+              <a id="sl-{{f.username}}" class="fac--students-link" href="#">STUDENTS</a>
+              <a id="al-{{f.username}}" class="fac--aoi-link" href="#">AREAS of INTEREST</a>
+            </div>
+            <div class="card-action card-action--inactive">
+              <div id="students--{{f.username}}" class="card-action-sub--inactive col-lg-12 col-md-12">
+              	<center class="card-subtitle">Students</center>
+              	<ul>
+              		{% for s in f.students %}
+              		<li>{{s.rollno}}&nbsp;&nbsp;{{s.user.get_full_name}}&nbsp;&nbsp;{{s.btpproject}}</li>
+              		{% endfor %}
+              	</ul>
+              </div>
+              <div id="aoi--{{f.username}}" class="card-action-sub--inactive col-lg-12 col-md-12">
+              	<center class="card-subtitle">Areas of Interest</center>
+              	<ul>
+              		{% for a in f.areas %}
+              		<li>{{a.title}}</li>
+              		{% endfor %}
+              	</ul>
+              </div>
+            </div>
+        </div>
+        </div>
+	{%endfor%}
+</div>

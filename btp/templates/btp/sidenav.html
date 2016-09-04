@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li>
+      <a href="#" id="sidebar--batches-link" class="hover-context hovered--active">Batches</a>
+    </li>
+    <li>
+      <a href="#"  id="sidebar--faculty-link" class="hover-context hovered--inactive">Faculty-wise Projects</a>
+    </li>
+  </ul>    
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  var parse = {'sidebar--batches-link':'main--batches','sidebar--faculty-link':'main--faculty'};
+  $('.hover-context').click(function(){
+    var main_id = parse[$(this).attr('id')];
+    $('.main--active').removeClass('main--active').addClass('main--inactive');
+    $('#'+main_id).addClass('main--active').removeClass('main--inactive');
+
+  });
+});
+</script>

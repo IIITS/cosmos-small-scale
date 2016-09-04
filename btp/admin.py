@@ -2,6 +2,7 @@ from django.contrib import admin
 from btp.models import *
 
 admin.site.register(Application)
+admin.site.register(Batch)
 admin.site.register(BTPProject)
 admin.site.register(BTPStudent)
 admin.site.register(Faculty)

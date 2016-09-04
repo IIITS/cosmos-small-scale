@@ -1,9 +1,9 @@
 $(document).ready(function(){
-    var hideit = ['#faculty-view', '#students-view','#submit-view', '#deadline-view'];
+    var hideit = ['#faculty-view', '#batch-view-1','#batch-view-2', '#deadline-view'];
     for(var i=0; i<hideit.length; i++){
 	$(hideit[i]).hide();	
     }	
-    $('#submit-view').show();	
+    $('#faculty-view').show();	
     $('#deadline-link').click(function(){
 	for(var i=0; i<hideit.length; i++){
 	$(hideit[i]).hide();
@@ -30,12 +30,16 @@ $(document).ready(function(){
     }
     $('#submissions-view').show();
     });  
-    $('#submit-link').click(function(){
+    $('#batch-link-1').click(function(){
      for(var i=0; i<hideit.length; i++){
 	$(hideit[i]).hide();	
     }
-    $('#submit-view').show();	
-    });      
-    	    
-    
+    $('#batch-view-1').show();	
+    });   
+    $('#batch-link-2').click(function(){
+     for(var i=0; i<hideit.length; i++){
+    $(hideit[i]).hide();    
+    }
+    $('#batch-view-2').show();  
+    });
 });

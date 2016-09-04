@@ -1,0 +1,42 @@
+
+<script>
+document.getElementById("uploadBtn").onchange = function () {
+    document.getElementById("uploadFile").value = this.value;
+};
+
+$('#file-submit-form').on('submit',function(){
+	    
+	    $.ajax({
+        	url : "post/report/", // the endpoint
+        	type : "POST", // http method
+        	data : { 'fileuploaded' : $('#uploadBtn').val() }, // data sent with the post request
+
+        	success : function(json) {
+        	console.log(json);
+		
+       		 },
+
+        	// handle a non-successful response
+        	error : function(xhr,errmsg,err) {
+            	
+        	}
+    	});
+	$.ajax({
+        	url : "post/report/", // the endpoint
+        	type : "GET", // http method
+        	data : { 'fileuploaded' : $('#uploadBtn').val() }, // data sent with the post request
+
+        	success : function(json) {
+        	console.log(json);
+		
+       		 },
+
+        	// handle a non-successful response
+        	error : function(xhr,errmsg,err) {
+            	
+        	}
+    	});
+
+
+    });
+</script>
