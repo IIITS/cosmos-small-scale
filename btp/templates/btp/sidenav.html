@@ -13,10 +13,12 @@
 $(document).ready(function(){
   var parse = {'sidebar--batches-link':'main--batches','sidebar--faculty-link':'main--faculty'};
   $('.hover-context').click(function(){
+    $('.hovered--active').removeClass('hovered--active').addClass('hovered--inactive');
+    $(this).removeClass('hovered--inactive').addClass('hovered--active');
     var main_id = parse[$(this).attr('id')];
     $('.main--active').removeClass('main--active').addClass('main--inactive');
     $('#'+main_id).addClass('main--active').removeClass('main--inactive');
-
+    
   });
 });
 </script>

@@ -34,8 +34,19 @@ class BTPProject(models.Model):
 	def __str__(self):
 		return str(self.code)+" "+str(self.title)
 	
-
-
+	def supervisors(self):
+		return self.supervisor.split(',')	
+class HonorsProject(models.Model):
+	code = models.CharField(max_length=8)
+	title = models.CharField(max_length=150)
+	keywords = models.TextField(default='NA')
+	supervisor = models.TextField()
+	
+	def __str__(self):
+		return str(self.code)+" "+str(self.title)
+	
+	def supervisors(self):
+		return self.supervisor.split(',')	
 	
 class BTPStudent(models.Model):
 	user = models.OneToOneField(User)
@@ -47,12 +58,22 @@ class BTPStudent(models.Model):
 	def fullname(self):
 		return self.user.get_full_name() 
 
+class HonorsStudent(models.Model):
+	user = models.OneToOneField(User)
+	branch = models.CharField(max_length=5) 
+	rollno = models.CharField(max_length=15)
+	honorsproject = models.ForeignKey(HonorsProject)
+	def __str__(self):
+		return str(self.rollno) +"   "+ str(self.user.get_full_name())
+	def fullname(self):
+		return self.user.get_full_name() 
+
 class Faculty(models.Model):
 	class Meta:
         	verbose_name_plural = "Faculties"
 
 	user = models.OneToOneField(User)
-	
+	area_of_interest = models.TextField(default='Not Provided')
 	def __str__(self):
 		return str(self.user.get_full_name())
 	
@@ -66,7 +87,19 @@ class Faculty(models.Model):
 				ProjectList.append(btpro)
 
 		return ProjectList
- 
+	def students(self):
+		STUDENTS = {'btp':[],'honors':[]}
+		_st_btp = BTPStudent.objects.all()
+ 		_st_honors = HonorsStudent.objects.all()
+ 		for _b in range(_st_btp.count()):
+ 			if self.user.username in _st_btp[_b].btpproject.supervisors():
+ 				STUDENTS['btp'].append(_st_btp[_st])
+ 		for _h in range(_st_honors.count()):
+ 			if self.user.username in _st_honors[_b].honorsproject.supervisors():
+ 				STUDENTS['honors'].append(_st_honors[_st])
+ 		return STUDENTS	
+ 	def aoi(self):
+ 		return self.area_of_interest.split(',')		
 class Semester(models.Model):
 	name = models.CharField(max_length=15)
 	sem = models.SmallIntegerField()

@@ -24,28 +24,56 @@
               <span class="card-title"><b>{{ f.user.get_full_name }}</b></span>
             </div>
             <div class="card-action">
-              <a id="sl-{{f.username}}" class="fac--students-link" href="#">STUDENTS</a>
-              <a id="al-{{f.username}}" class="fac--aoi-link" href="#">AREAS of INTEREST</a>
+              <a id="sl---{{f.user.id}}" class="fac--students-link" href="#">STUDENTS</a>
+              <a id="al---{{f.user.id}}" class="fac--aoi-link" href="#">AREAS of INTEREST</a>
             </div>
-            <div class="card-action card-action--inactive">
-              <div id="students--{{f.username}}" class="card-action-sub--inactive col-lg-12 col-md-12">
-              	<center class="card-subtitle">Students</center>
-              	<ul>
-              		{% for s in f.students %}
-              		<li>{{s.rollno}}&nbsp;&nbsp;{{s.user.get_full_name}}&nbsp;&nbsp;{{s.btpproject}}</li>
-              		{% endfor %}
-              	</ul>
-              </div>
-              <div id="aoi--{{f.username}}" class="card-action-sub--inactive col-lg-12 col-md-12">
+            <div id="students--{{f.user.id}}" class="card-action card-action-sub card-action--inactive col-lg-12 col-md-12">
+              	<div class="col-lg-6 col-md-6">
+              		<span class="card-subtitle">BTP Students</span>
+              		<ul>
+              			{% for s in f.students.btp %}
+              			<li>{{s.rollno}}&nbsp;&nbsp;{{s.user.get_full_name}}&nbsp;&nbsp;{{s.btpproject}}</li>
+              			{% empty %}
+              			<li>No students enrolled yet.</li>
+              			{% endfor %}
+              		</ul>
+              	</div>
+              	<div class="col-lg-6 col-md-6">
+              		<span class="card-subtitle">Honors Students</span>
+              		<ul>
+              			{% for s in f.students.honors %}
+              			<li>{{s.rollno}}&nbsp;&nbsp;{{s.user.get_full_name}}&nbsp;&nbsp;{{s.btpproject}}</li>
+              			{% empty %}
+              			<li>No students enrolled yet.</li>
+              			{% endfor %}
+              		</ul>
+              	</div>
+            </div>
+            <div id="aoi--{{f.user.id}}" class="card-action-sub card-action card-action--inactive col-lg-12 col-md-12">
               	<center class="card-subtitle">Areas of Interest</center>
               	<ul>
-              		{% for a in f.areas %}
+              		{% for a in f.aoi %}
               		<li>{{a.title}}</li>
+              		{% empty %}
+              		<li>No areas are provided.</li>
               		{% endfor %}
               	</ul>
-              </div>
             </div>
         </div>
         </div>
 	{%endfor%}
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.fac--students-link').click(function(){
+			$('.card-action-sub').addClass('card-action--inactive').removeClass('card-action--active');
+			var _id = $(this).attr('id').split('---')[1];
+			$('#students--'+_id).addClass('card-action--active').removeClass('card-action--inactive');
+		});
+		$('.fac--aoi-link').click(function(){
+			$('.card-action-sub').addClass('card-action--inactive').removeClass('card-action--active');
+			var _id = $(this).attr('id').split('---')[1];
+			$('#aoi--'+_id).addClass('card-action--active').removeClass('card-action--inactive');
+		});
+	})
+</script>

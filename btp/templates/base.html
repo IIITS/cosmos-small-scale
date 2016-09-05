@@ -24,7 +24,7 @@
 {% block nav %}
   {% include 'btp/nav.html' %}
 {% endblock %}
-<div class="container-fluid">
+<div class="container-fluid" style="min-height:80vh;">
   {% block sidenav %}
     <div class="col-lg-3">
       {% include 'btp/sidenav.html' %}
@@ -34,7 +34,11 @@
     <div class="col-lg-9">
       {% include 'btp/main.html' %}
     </div>    
-  {% endblock %} 
-</div>  
+  {% endblock %}
+  
+</div> 
+{% block footer %}
+    <footer><center class="card-subtitle">Developed by <abbr title="Network, Server Administrator, Webmaster, IIITS">Sahal Sajjad</abbr></center></footer>
+  {% endblock %}  
 </body>
 </html>

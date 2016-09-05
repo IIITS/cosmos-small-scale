@@ -8,6 +8,9 @@ body {
 a img{
   border: 0px;
 }
+a:focus{
+  outline: none;
+}
 .cosmos-logo{
  font:normal 40px Arial;
  color:#FFFFFF;
@@ -762,5 +765,6 @@ _:-ms-input-placeholder, :root .demo-graph {
 .card-action--active{
   display: block;
 }
-.card-action-sub--active{display: block;}
-.card-action-sub--inactive{display: none;}
+.card-subtitle{
+  color:grey; font-weight: bold;
+}
