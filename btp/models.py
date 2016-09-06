@@ -50,11 +50,9 @@ class HonorsProject(models.Model):
 	
 class BTPStudent(models.Model):
 	user = models.OneToOneField(User)
-	branch = models.CharField(max_length=5) 
-	rollno = models.CharField(max_length=15)
 	btpproject = models.ForeignKey(BTPProject)
 	def __str__(self):
-		return str(self.rollno) +"   "+ str(self.user.get_full_name())
+		return str(self.user.get_full_name())
 	def fullname(self):
 		return self.user.get_full_name() 
 

@@ -768,3 +768,9 @@ _:-ms-input-placeholder, :root .demo-graph {
 .card-subtitle{
   color:grey; font-weight: bold;
 }
+.list-specifier{
+  display: block;
+padding: 4px;
+border: 1px solid grey;
+border-radius: 0px;
+}
