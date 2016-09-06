@@ -91,12 +91,12 @@ class Faculty(models.Model):
 		STUDENTS = {'btp':[],'honors':[]}
 		_st_btp = BTPStudent.objects.all()
  		_st_honors = HonorsStudent.objects.all()
- 		for _b in range(_st_btp.count()):
- 			if self.user.username in _st_btp[_b].btpproject.supervisors():
- 				STUDENTS['btp'].append(_st_btp[_st])
- 		for _h in range(_st_honors.count()):
- 			if self.user.username in _st_honors[_b].honorsproject.supervisors():
- 				STUDENTS['honors'].append(_st_honors[_st])
+ 		for _st in _st_btp:
+ 			if self.user.username in _st.btpproject.supervisors():
+ 				STUDENTS['btp'].append(_st)
+ 		for _st in _st_honors:
+ 			if self.user.username in _st.honorsproject.supervisors():
+ 				STUDENTS['honors'].append(_st)
  		return STUDENTS	
  	def aoi(self):
  		return self.area_of_interest.split(',')		

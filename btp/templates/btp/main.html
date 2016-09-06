@@ -69,11 +69,13 @@
 			$('.card-action-sub').addClass('card-action--inactive').removeClass('card-action--active');
 			var _id = $(this).attr('id').split('---')[1];
 			$('#students--'+_id).addClass('card-action--active').removeClass('card-action--inactive');
+			$("html,body").animate({scrollTop:$('#students--'+_id).offset().top -250});
 		});
 		$('.fac--aoi-link').click(function(){
 			$('.card-action-sub').addClass('card-action--inactive').removeClass('card-action--active');
 			var _id = $(this).attr('id').split('---')[1];
 			$('#aoi--'+_id).addClass('card-action--active').removeClass('card-action--inactive');
+			$('html, body').animate({scrollTop: $('#aoi--'+_id).offset().top - 250});
 		});
 	})
 </script>
